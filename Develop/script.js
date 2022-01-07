@@ -4,7 +4,7 @@ function generatePassword() {
     // determine password length (**still need to fix it so if they do the wrong number it won't let them)
     //(**also need to fix so the correct number logs as passwordLength) */
     var passwordLength = Number(window.prompt("Please choose a password length between 8 - 128 characters."));
-    if (passwordLength < 8 || passwordLength > 128) {
+    if (passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)) {
       return generatePassword();
       }
    
