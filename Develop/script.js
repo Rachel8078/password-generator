@@ -1,13 +1,57 @@
 // Assignment code here
+
 function generatePassword() {
-  var passwordLength = window.prompt("Please choose a password length between 8 - 128 characters.");
-  if (passwordLength < 8 || passwordLength > 128) {
-    alert("Please choose a password between 8 - 128 characters.");
-    window.prompt("Please choose a password length between 8 - 128 characters.");
+    // determine password length (**still need to fix it so if they do the wrong number it won't let them)
+    //(**also need to fix so the correct number logs as passwordLength) */
+    var passwordLength = Number(window.prompt("Please choose a password length between 8 - 128 characters."));
+    if (passwordLength < 8 || passwordLength > 128) {
+      return generatePassword();
+      }
+   
+  // determine character styles (**still need to fix so they have to choose at least one)
+  var lowerCase = window.confirm("Would you like your password to include lowercase letters?");
+  if (lowerCase == true) {
+    lowerCase = "- Lowercase \n";
+  } else {
+    lowerCase = "";
   }
-  var characterTypes = window.prompt("Please indicate which character types to include: lowercase, uppercase, numeric, and/or special characters?");
-  window.confirm("You have chosen a password length of " + passwordLength + " and the following character type(s): " + characterTypes+ ". Is this correct?");
+  
+  var upperCase = window.confirm("Would you like your password to include uppercase letters?");
+  if (upperCase == true) {
+    upperCase = "- Uppercase \n";
+  } else {
+    upperCase = "";
+  }
+
+  var numbers = window.confirm("Would you like your password to include numbers?");
+  if (numbers == true) {
+    numbers = "- Numbers \n";
+  } else {
+    numbers = "";
+  }
+
+  var specialCharacters = window.confirm("Would you like your password to include special characters?");
+  if (specialCharacters == true) {
+    specialCharacters = "- Special characters \n";
+  } else {
+    specialCharacters = "";
+  }
+
+  if (lowerCase == false && upperCase == false && numbers == false && specialCharacters == false) {
+    window.alert("You must select at least one character type.  Please try again.")
+    return generatePassword();
+  } 
+  
+  var passwordConfirm = window.confirm("You have chosen a password length of " + passwordLength + " and the following character type(s): " + '\n' + lowerCase + upperCase + numbers + specialCharacters + "Is this correct?");
+  if (passwordConfirm == false) {
+    return generatePassword();
+  }
+
+  // for (var i = passwordLength; i <= passwordLength; i++) {
+  //   return Math.floor(Math.random() * passwordLength);
+  // }
 }
+
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
