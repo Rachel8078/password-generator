@@ -9,10 +9,7 @@ var characters = {
 // all selected characters will end up in this array
 var included = [];
 
-
-
-
-
+// main fuction to determine user requirements and run password generator
 function generatePassword() {
   //reset included array to empty
   included.length = 0;
@@ -68,77 +65,31 @@ function generatePassword() {
   } 
 
   // look to see which characters user wants in password
-  console.log("Building random password as a string");
-  console.log(included);
-  console.log(characters.lower);
     if (lower == "- Lowercase \n") {
-      console.log("Adding lowercases");
       var lowerCase = characters.lower.split('');
-      console.log(lowerCase);
       included = included.concat(lowerCase);
-      console.log(included);
    }; 
-console.log(included);
-  if(upper == "- Uppercase \n") {
-    var upperCase = characters.upper.split('');
-    included = included.concat(upperCase);
+    if(upper == "- Uppercase \n") {
+      var upperCase = characters.upper.split('');
+      included = included.concat(upperCase);
   };
-
-  if(numbers == "- Numbers \n") {
-    var incNumbers = characters.numbers.split('');
-    included = included.concat(incNumbers);
+    if(numbers == "- Numbers \n") {
+      var incNumbers = characters.numbers.split('');
+      included = included.concat(incNumbers);
   };
-
-  if(symbols == "- Special characters \n") {
-    var specialCharacters = characters.symbols.split('');
-    included = included.concat(specialCharacters);
+    if(symbols == "- Special characters \n") {
+      var specialCharacters = characters.symbols.split('');
+      included = included.concat(specialCharacters);
   } 
   
-  
- 
-  console.log(included);
-  // var getKey = 
-  // function lowerCase() {
-  //   return included.lower[Math.floor(Math.random() * included.lower.length)];
-  // };
-  // function upperCase() {
-  //   return included.upper[Math.floor(Math.random() * included.upper.length)];
-  // };
-  // function incNumbers() {
-  //   return included.numbers[Math.floor(Math.random() * included.numbers.length)];
-  // };
-  // function specialCharacters() {
-  //   return included.symbols[Math.floor(Math.random() * included.symbols.length)];
-  // }
-// console.log(getKey);
-
-
-// // generate random passwod based on characters and length selected
-// var passwordText = '';
-
-// // this runs for the number of times I choose for password length.  How to I get this to be applied to how many times it chooses a random character for me?
-var passwordText = "";
-for (var i = 0; i < length; i++) {
-passwordText = passwordText.concat(included[Math.floor(Math.random() * included.length)]);
-// included.push(getKey);
-}
-console.log(passwordText);
-// console.log(getKey);
-// // this will get a random item from my designated array to show up in the box.  How to I get it to choose a random character from each item in the array until the length is met?
-
-
-return passwordText;
-
-
-
-
+  // use selected characters in random string to return password
+  var passwordText = "";
+  for (var i = 0; i < length; i++) {
+  passwordText = passwordText.concat(included[Math.floor(Math.random() * included.length)]);
+  }
+  return passwordText;
 };
 
-
-
-
- 
-  
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
