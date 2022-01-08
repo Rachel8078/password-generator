@@ -10,10 +10,13 @@ var characters = {
 var included = [];
 
 
+
+
+
 function generatePassword() {
   //reset included array to empty
   included.length = 0;
-
+  
   // determine password length
   var length = Number(window.prompt("Please choose a password length between 8 - 128 characters."));
   if (length < 8 || length > 128 || isNaN(length)) {
@@ -65,38 +68,74 @@ function generatePassword() {
   } 
 
   // look to see which characters user wants in password
-  var usedCharacters = function() {
+  console.log("Building random password as a string");
+  console.log(included);
+  console.log(characters.lower);
     if (lower == "- Lowercase \n") {
-      characters.lower.split('');
-      included.push(characters.lower);
+      console.log("Adding lowercases");
+      var lowerCase = characters.lower.split('');
+      console.log(lowerCase);
+      included = included.concat(lowerCase);
+      console.log(included);
    }; 
-
+console.log(included);
   if(upper == "- Uppercase \n") {
-    characters.upper.split('');
-    included.push(characters.upper);
+    var upperCase = characters.upper.split('');
+    included = included.concat(upperCase);
   };
 
   if(numbers == "- Numbers \n") {
-    characters.numbers.split('');
-    included.push(characters.numbers);
+    var incNumbers = characters.numbers.split('');
+    included = included.concat(incNumbers);
   };
 
   if(symbols == "- Special characters \n") {
-    characters.symbols.split('');
-    included.push(characters.symbols);
+    var specialCharacters = characters.symbols.split('');
+    included = included.concat(specialCharacters);
   } 
-  }
   
-  usedCharacters();
   
-// generate random passwod based on characters and length selected
-var passwordText = included[Math.floor(Math.random() * included.length)];
+ 
+  console.log(included);
+  // var getKey = 
+  // function lowerCase() {
+  //   return included.lower[Math.floor(Math.random() * included.lower.length)];
+  // };
+  // function upperCase() {
+  //   return included.upper[Math.floor(Math.random() * included.upper.length)];
+  // };
+  // function incNumbers() {
+  //   return included.numbers[Math.floor(Math.random() * included.numbers.length)];
+  // };
+  // function specialCharacters() {
+  //   return included.symbols[Math.floor(Math.random() * included.symbols.length)];
+  // }
+// console.log(getKey);
+
+
+// // generate random passwod based on characters and length selected
+// var passwordText = '';
+
+// // this runs for the number of times I choose for password length.  How to I get this to be applied to how many times it chooses a random character for me?
+var passwordText = "";
 for (var i = 0; i < length; i++) {
-console.log("am i close?");
+passwordText = passwordText.concat(included[Math.floor(Math.random() * included.length)]);
+// included.push(getKey);
 }
+console.log(passwordText);
+// console.log(getKey);
+// // this will get a random item from my designated array to show up in the box.  How to I get it to choose a random character from each item in the array until the length is met?
+
+
 return passwordText;
 
+
+
+
 };
+
+
+
 
  
   
