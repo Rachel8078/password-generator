@@ -1,58 +1,105 @@
 // Assignment code here
+var characters = {
+  lower: "abcdefghijklmnopqrstuvwxyz",
+  upper: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  numbers: "012345679",
+  symbols: "!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~",
+};
+
+// all selected characters will end up in this array
+var included = [];
+
 
 function generatePassword() {
-    // determine password length (**still need to fix it so if they do the wrong number it won't let them)
-    //(**also need to fix so the correct number logs as passwordLength) */
-    var passwordLength = Number(window.prompt("Please choose a password length between 8 - 128 characters."));
-    if (passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)) {
-      return generatePassword();
-      }
-   
-  // determine character styles (**still need to fix so they have to choose at least one)
-  var lowerCase = window.confirm("Would you like your password to include lowercase letters?");
-  if (lowerCase == true) {
-    lowerCase = "- Lowercase \n";
-  } else {
-    lowerCase = "";
+  //reset included array to empty
+  included.length = 0;
+
+  // determine password length
+  var length = Number(window.prompt("Please choose a password length between 8 - 128 characters."));
+  if (length < 8 || length > 128 || isNaN(length)) {
+    return generatePassword();
   }
-  
-  var upperCase = window.confirm("Would you like your password to include uppercase letters?");
-  if (upperCase == true) {
-    upperCase = "- Uppercase \n";
+   
+  // determine if lowercase will be used 
+  var lower = window.confirm("Would you like your password to include lowercase letters?");
+  if (lower === true) {
+    lower = "- Lowercase \n";
+    } else {
+      lower = "";
+  } 
+
+  // determine if uppercase will be used
+  var upper = window.confirm("Would you like your password to include uppercase letters?");
+  if (upper === true) {
+    upper = "- Uppercase \n";
   } else {
-    upperCase = "";
+    upper = "";
   }
 
+  // determine if numbers will be used
   var numbers = window.confirm("Would you like your password to include numbers?");
-  if (numbers == true) {
+  if (numbers === true) {
     numbers = "- Numbers \n";
   } else {
     numbers = "";
   }
 
-  var specialCharacters = window.confirm("Would you like your password to include special characters?");
-  if (specialCharacters == true) {
-    specialCharacters = "- Special characters \n";
+  // determine if special characters will be used
+  var symbols = window.confirm("Would you like your password to include special characters?");
+  if (symbols === true) {
+    symbols = "- Special characters \n";
   } else {
-    specialCharacters = "";
+    symbols = "";
   }
 
-  if (lowerCase == false && upperCase == false && numbers == false && specialCharacters == false) {
+  // confirm user has made at least one character type selection
+  if (lower == false && upper == false && numbers == false && symbols == false) {
     window.alert("You must select at least one character type.  Please try again.")
     return generatePassword();
   } 
   
-  var passwordConfirm = window.confirm("You have chosen a password length of " + passwordLength + " and the following character type(s): " + '\n' + lowerCase + upperCase + numbers + specialCharacters + "Is this correct?");
+  // confirm user selections are accurate
+  var passwordConfirm = window.confirm("You have chosen a password length of " + length + " and the following character type(s): " + '\n' + lower + upper + numbers + symbols + "Is this correct?");
   if (passwordConfirm == false) {
     return generatePassword();
+  } 
+
+  // look to see which characters user wants in password
+  var usedCharacters = function() {
+    if (lower == "- Lowercase \n") {
+      characters.lower.split('');
+      included.push(characters.lower);
+   }; 
+
+  if(upper == "- Uppercase \n") {
+    characters.upper.split('');
+    included.push(characters.upper);
+  };
+
+  if(numbers == "- Numbers \n") {
+    characters.numbers.split('');
+    included.push(characters.numbers);
+  };
+
+  if(symbols == "- Special characters \n") {
+    characters.symbols.split('');
+    included.push(characters.symbols);
+  } 
   }
-
-  // for (var i = passwordLength; i <= passwordLength; i++) {
-  //   return Math.floor(Math.random() * passwordLength);
-  // }
+  
+  usedCharacters();
+  
+// generate random passwod based on characters and length selected
+var passwordText = included[Math.floor(Math.random() * included.length)];
+for (var i = 0; i < length; i++) {
+console.log("am i close?");
 }
+return passwordText;
 
+};
 
+ 
+  
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
